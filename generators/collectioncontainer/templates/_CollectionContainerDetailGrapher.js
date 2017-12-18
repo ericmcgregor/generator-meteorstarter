@@ -15,21 +15,9 @@ class <%= containerName %>Component extends Component {
     if (this.props.error) {
         return <div>{this.props.error.reason}</div>
     }
-
+    console.log(this.props)
     return (
-      <Table striped>
-        <tbody>
-        {
-            this.props.data.map((item, i)=>{
-              return (
-                <tr key={i}>
-                  <td></td>
-                </tr>
-              )
-            })
-        }
-        </tbody>
-      </Table>
+      <div></div>
 
     );
   }
@@ -40,9 +28,11 @@ class <%= containerName %>Component extends Component {
 
 const <%= containerName %> = withQuery((props) => {
   return <%= collectionName %>All.clone({
-    filters:{},
+    filters:{
+      _id:props.match.params.<%= collectionNameSingle %>Id
+    },
     options:{}
   });
-}, {reactive:true})(<%= containerName %>Component)
+}, {reactive:true, single:true})(<%= containerName %>Component)
 
 export default <%= containerName %>

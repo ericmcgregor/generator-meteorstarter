@@ -20,9 +20,9 @@ export const load<%= collectionVariable %> = ({filters, options}={}) =>{
 }
 
 
-export const <%= collectionName.toUpperCase() %>_DETAIL_SUBSCRIPTION_READY = 'QUERY_GET<%= collectionName.toUpperCase() %>_DETAIL_SUBSCRIPTION_READY';
-export const <%= collectionName.toUpperCase() %>_DETAIL_SUBSCRIPTION_CHANGED = 'QUERY_GET<%= collectionName.toUpperCase() %>_DETAIL_SUBSCRIPTION_CHANGED';
-export const <%= collectionName.toUpperCase() %>_DETAIL_SUB = 'query.get<%= collectionVariable %>Detail';
+export const <%= collectionName.toUpperCase() %>_DETAIL_SUBSCRIPTION_READY = 'QUERY_GET_<%= collectionVariable.toUpperCase() %>_DETAIL_SUBSCRIPTION_READY';
+export const <%= collectionName.toUpperCase() %>_DETAIL_SUBSCRIPTION_CHANGED = 'QUERY_GET_<%= collectionVariable.toUpperCase() %>_DETAIL_SUBSCRIPTION_CHANGED';
+export const <%= collectionName.toUpperCase() %>_DETAIL_SUB = 'query.get.<%= collectionVariable %>.Detail';
 
 export const load<%= collectionVariable %>Detail = ({filters, options}={}) =>{
     const query = <%= collectionName %>All.clone({
@@ -32,7 +32,20 @@ export const load<%= collectionVariable %>Detail = ({filters, options}={}) =>{
 
     return startSubscription({
         key: <%= collectionName.toUpperCase() %>_DETAIL_SUB,
-        get: () => query.fetch(),
+        get: () => query.fetchOne(),
         subscribe: () => query.subscribe(),
     });
 }
+
+// export const fetchExternalData = ({_id}) =>{
+//   return function(dispatch) {
+//     dispatch({type:"FETCH_EXTERNAL_DATA",id:_id})
+//     Meteor.call('reports.fetchDetails', _id, (err, results)=>{
+//       dispatch({
+//         type:"SUCCESS_FETCH_EXTERNAL_DATA",
+//         id:_id,
+//         payload:results
+//       })
+//     })
+//   }
+// }

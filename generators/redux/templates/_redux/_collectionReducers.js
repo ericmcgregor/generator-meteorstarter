@@ -48,6 +48,16 @@ export default function reducer(state=initialState, action) {
         }
       };
 
+    // case "SUCCESS_FETCH_EXTERNAL_DATA":
+    //   return {
+    //     ...state,
+    //     [action.id]:{
+    //       ...(state[action.id]),
+    //       externalData:[
+    //         ...action.payload
+    //       ]
+    //     },
+    //   };
 
     case STOP_SUBSCRIPTION:
       // return action.payload === <%= collectionName.toUpperCase() %>_SUB
